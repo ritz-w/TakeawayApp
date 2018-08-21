@@ -5,11 +5,13 @@ require 'wikipedia'
 
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create(name: "Ritz Wu", username: "rizulol", postcode: "SE1 7LH")
-User.create(name: "Adham Muhammad", username: "adham_eats", postcode: "SW16 1AA")
-User.create(name: "Sarah Jacobs", username: "sarah_eats", postcode: "N15 5PX")
-User.create(name: "Steven Balasta", username: "steven_eats", postcode: "EC2Y 1NT")
-User.create(name: "Maduri Vassaramo", username: "maduri_eats", postcode: "N5 5EH")
+User.create([
+  {name: "Ritz Wu", username: "rizulol", password: "xoxo", postcode: "SE1 7LH"},
+  {name: "Adham Muhammad", username: "adham_eats", password: "xoxo", postcode: "SW16 1AA"},
+  {name: "Sarah Jacobs", username: "sarah_eats", password: "xoxo", postcode: "N15 5PX"},
+  {name: "Steven Balasta", username: "steven_eats", password: "xoxo", postcode: "EC2Y 1NT"},
+  {name: "Maduri Vassaramo", username: "maduri_eats", password: "xoxo", postcode: "N5 5EH"}
+  ])
 
 Restaurant.create(name: "My Old Place", address: "88-90 Middlesex St, London", postcode: "E1 7EZ", rating: 0, phone_number: '020 72472200')
 Restaurant.create(name: "Taste of China", address: "53 Hackney Rd, London", postcode: " E2 7NX", rating: 0, phone_number: '020 77391228')
@@ -24,7 +26,16 @@ dish_names.each do |dish_name|
   dishes_array = dish_name.values[0]
   dishes_array.each do |dish|
     wiki_page = Wikipedia.find(dish)
-    imgs = wiki_page.images.select {|img| img.include?(".JPG") || img.include?(".jpg")}
-    Dish.create(name: dish, description: wiki_page.summary, region: region, rating: 0, photo_1: imgs.first, photo_2: imgs.last)
+    dish_url = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + dish + '&generator=images&gimlimit=10&prop=imageinfo&iiprop=url|dimensions|mime&format=json'
+    uri = URI(dish_url)
+    response = Net::HTTP.get(uri)
+    json = JSON.parse(response)
+    keys = json["query"]["pages"].keys
+    images = []
+    keys.each do |key|
+      images << json["query"]["pages"]["#{key}"]["imageinfo"][0]["url"]
+    end
+    img_jpg_urls = images.select {|img| img.include?(".JPG") || img.include?(".jpg")}
+    Dish.create(name: dish, description: wiki_page.summary, region: region, rating: 0, photo_1: img_jpg_urls.first, photo_2: img_jpg_urls.last)
   end
 end

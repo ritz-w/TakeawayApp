@@ -1,0 +1,70 @@
+/*
+ *= require_self
+ *= require_tree .
+ */
+@import "bootstrap";
+
+body {
+  background-color: #ec624c;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Baloo Bhai', 'M PLUS Rounded 1c', sans-serif;
+}
+
+footer {
+  margin-top: 10%;
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+//navbar styling
+.navbar-custom {
+  background-color: #F3C43E;
+  font-family: 'Baloo Bhai', 'M PLUS Rounded 1c', sans-serif;
+  border-bottom: 3px solid black;
+}
+
+.navbar-nav {
+  position: absolute;
+  right: 50px;
+}
+
+.dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+//welcome page
+.welcome-section {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 70%;
+  margin-left: 15%;
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 30px;
+  background-color: #e6dfb0;
+}
+
+.carousel-section {
+  width: 70%;
+}
+.welcome-message-text {
+  text-align: right;
+}
+
+
+.item {
+    height: 450px;
+    width: auto !important;
+    margin: 0 auto;
+}
+
+.carousel-background {
+  background-color: black;
+}
+
+.carousel-caption {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}

@@ -1,0 +1,22 @@
+
+<% if flash[:errors] %>
+  <% flash[:errors].each do |e| %>
+    <p> <%= e %> </p>
+  <% end %>
+<% end %>
+
+<div class="container new-form">
+  <h1>Log in</h1>
+  <%= form_tag sessions_path do %>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <%= text_field_tag :username, nil, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <%= text_field_tag :password, nil, class: "form-control" %>
+    <small id="nameHelp" class="form-text">Forgot password?</small>
+  <br>
+  <%= submit_tag "Login", class: "btn btn-primary" %>
+  <% end %>
+</div>
