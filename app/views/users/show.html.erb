@@ -1,0 +1,13 @@
+<h1> <%= @user.name %></h1>
+<h2> My favorite restaurants: </h2>
+<ol>
+  <% @user.restaurants.each do |restaurant| %>
+  <li><%= restaurant.name %></li>
+  <% end %>
+</ol>
+<h2> My favorite dishes: </h2>
+<ol>
+  <% @user.dishes.each do |dish| %>
+  <li><%= dish.name %></li>
+  <% end %>
+</ol>

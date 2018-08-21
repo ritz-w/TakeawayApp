@@ -1,4 +1,4 @@
 class User < ApplicationRecord
-  has_many :restaurants, through: :users_restaurants
-  has_many :dishes, through: :users_dishes
+  has_and_belongs_to_many :restaurants
+  has_and_belongs_to_many :dishes
 end
