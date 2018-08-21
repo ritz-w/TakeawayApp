@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html>
+<h1><%= @restaurant.name %></h1><br>
+<%= "#{@restaurant.number},  #{@restaurant.address.split(",")[2]}, #{@restaurant.postcode}" %><br>
+<% @restaurant.latitude %>
+<% @restaurant.longitude %>

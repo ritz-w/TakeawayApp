@@ -1,0 +1,22 @@
+<h1> Add new Restaurant </h1>
+
+<% if @restaurant.errors.any? %>
+  <div id="error_explanation">
+    <p>There were some errors:</p>
+    <ul>
+      <% @restaurant.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+<%= form_for @restaurant do |f| %>
+<%= f.label "Name: " %>
+<%= f.text_field :name %><p>
+<%= f.label "building number: "%>
+<%= f.number_field :number %><p>
+<%= f.label "Postcode: " %>
+<%= f.text_field :postcode %><p>
+<%= f.submit "Add Restaurant" %>
+<% end %>
