@@ -1,0 +1,18 @@
+<h1> Add new dish </h1>
+
+<% if @dish.errors.any? %>
+  <div id="error_explanation">
+    <p>There were some errors:</p>
+    <ul>
+      <% @dish.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <%= form_for @dish do |f| %>
+  <%= f.label "Name: " %>
+  <%= f.text_field :name %><p>
+  <%= f.submit "Add Dish" %>
+  <% end %>

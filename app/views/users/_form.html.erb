@@ -1,0 +1,10 @@
+<%= form_for @user  do |f| %>
+<h3>Name:</h3>
+<%= f.text_field :name %>
+<h3>Username:</h3>
+<%= f.text_field :username %>
+<h3>Postcode:</h3>
+<%= f.text_field :postcode %>
+<br>
+<%= f.submit %>
+<% end %>

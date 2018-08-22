@@ -1,6 +1,22 @@
-<!DOCTYPE html>
-<html>
 <h1><%= @restaurant.name %></h1><br>
 <%= "#{@restaurant.number},  #{@restaurant.address.split(",")[2]}, #{@restaurant.postcode}" %><br>
+<%= "#{@restaurant.phone_number}" %>
 <% @restaurant.latitude %>
 <% @restaurant.longitude %>
+<p>
+
+<% if @restaurant.dishes != [] %>
+  <p>Dishes on menu:</p>
+    <% @restaurant.dishes.each do |dish| %>
+    <span><%= link_to dish.name, dish_path(dish) %> | <%= dish.region %><br>
+    <% end %>
+<% else %>
+  <p>This restaurant doesnt currently have a menu...</p>
+<% end %>
+<p>
+<%= form_for @restaurant, method: :delete do |f| %>
+	<%= f.submit "Delete Restaurant" %>
+<% end %>
+<p>
+<%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %><p>
+<%= link_to "Back to Restaurants", restaurants_path%>

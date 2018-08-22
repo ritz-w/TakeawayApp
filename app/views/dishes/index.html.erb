@@ -1,0 +1,5 @@
+<h1> Dishes </h1>
+<%= link_to "Create new dish", new_dish_path  %>
+<% @dishes.each do |dish| %>
+  <p><%= link_to dish.name, dish_path(dish)%></p>
+<% end %>
