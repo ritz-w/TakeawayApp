@@ -23,9 +23,10 @@
           Takeaways
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">All Takeaways</a>
+          <%= link_to 'All Takeaways', restaurants_path, class: "dropdown-item" %>
           <a class="dropdown-item" href="#">Takeaways Near You</a>
           <a class="dropdown-item" href="#">Takeaways By Regional Cuisine</a>
+          <%= link_to 'My Closest Takeaways', mytakeaways_path, class: "dropdown-item" %>
         </div>
       </li>
         <li class="nav-item dropdown">
@@ -33,7 +34,7 @@
             Dishes
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">All Dishes</a>
+            <%= link_to 'All Dishes', dishes_path, class: "dropdown-item" %>
             <a class="dropdown-item" href="#">Dishes By Regional Cuisine</a>
           </div>
         </li>
@@ -43,6 +44,8 @@
         </li>
           <% else %>
           <%= link_to "Log in", login_path, class: "nav-item nav-link" %>
+          <%= link_to "Sign up", signup_path, class: "nav-item nav-link" %>
+
           <% end %>
     </div>
   </div>
