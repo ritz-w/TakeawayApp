@@ -1,0 +1,16 @@
+<h1><%= @dish.name %></h1>
+<p>
+<div><%= image_tag "https://loremflickr.com/320/240/#{@dish.name.split.join(",")}" %></div>
+
+<%= @dish.description %>
+
+<%= form_for @dish, method: :delete do |f| %>
+	<%= f.submit "Delete Dish" %>
+<% end %>
+
+<%= link_to "Edit Dish", edit_dish_path(@dish) %><br>
+<%= link_to "Back to Dishes", dishes_path%>
+
+
+<!-- Is there a better way to display photos? Maybe scrape google images and set the query to return 3 images max to display in show page? -->
+<!-- Note to SELF!!! - if you change way photos are displayed, return to database and delete unused attribute columns -->

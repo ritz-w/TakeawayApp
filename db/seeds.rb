@@ -5,6 +5,12 @@ require 'wikipedia'
 
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+Restaurant.destroy_all
+Dish.destroy_all
+
+
 User.create([
   {name: "Ritz Wu", username: "rizulol", password: "xoxo", postcode: "SE1 7LH"},
   {name: "Adham Muhammad", username: "adham_eats", password: "xoxo", postcode: "SW16 1AA"},
