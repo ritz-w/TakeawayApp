@@ -1,5 +1,22 @@
-<h1> Dishes </h1>
-<%= link_to "Create new dish", new_dish_path  %>
-<% @dishes.each do |dish| %>
-  <p><%= link_to dish.name, dish_path(dish)%></p>
-<% end %>
+<div class="container">
+  <p>
+  <div class="row">
+    <div class="col">
+      <h1> Dishes </h1>
+      <p>
+    </div>
+    <div class="col">
+      <%= link_to "Create new dish", new_dish_path, :class => "btn btn-primary"  %><p>
+    </div>
+  </div>
+  <% @dishes.each do |dish| %>
+  <div class="row">
+    <div class="col">
+      <%= image_tag "https://loremflickr.com/220/140/#{dish.name.split.join(",")}", class: "image" %>
+    </div>
+    <div class="col">
+      <%= link_to dish.name, dish_path(dish)%><p>
+    </div>
+  </div><p>
+  <% end %>
+</div>

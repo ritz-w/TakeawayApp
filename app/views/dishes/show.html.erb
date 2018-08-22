@@ -1,15 +1,31 @@
-<h1><%= @dish.name %></h1>
 <p>
-<div><%= image_tag "https://loremflickr.com/320/240/#{@dish.name.split.join(",")}" %></div>
+<div class="container">
+	<div class="row">
+		<h1><%= @dish.name %></h1>
+	</div>
+	<div class="row">
+		<%= image_tag "https://loremflickr.com/320/240/#{@dish.name.split.join(",")}", class: "image" %>
+		<div class="col-sm">
+			<%= @dish.description %>
+		</div>
+	</div><p>
+	<div class="row">
+		<div	class="col-sm">
+		<%= form_for @dish, method: :delete do |f| %>
+			<% f.submit "Delete Dish", :class => "btn btn-primary" %>
+			<% end %>
+		</div>
+		<div	class="col-sm">
+			<%= link_to "Edit Dish", edit_dish_path(@dish), :class => "btn btn-primary" %>
+		</div>
+		<div	class="col-sm">
+			<%= link_to "Back to Dishes", dishes_path, :class => "btn btn-primary" %>
+		</div>
+	</div>
+	</div>
+</div>
 
-<%= @dish.description %>
 
-<%= form_for @dish, method: :delete do |f| %>
-	<%= f.submit "Delete Dish" %>
-<% end %>
-
-<%= link_to "Edit Dish", edit_dish_path(@dish) %><br>
-<%= link_to "Back to Dishes", dishes_path%>
 
 
 <!-- Is there a better way to display photos? Maybe scrape google images and set the query to return 3 images max to display in show page? -->

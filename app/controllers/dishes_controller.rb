@@ -14,7 +14,6 @@ class DishesController < ApplicationController
   end
 
   def create
-    byebug
     @dish = Dish.create(dish_params(:name, :description, :region, :rating, :image_url, :photo_1, :photo_2, :photo_3))
 
     redirect_to dish_path(@dish)
