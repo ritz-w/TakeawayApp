@@ -7,11 +7,8 @@ Rails.application.routes.draw do
   get "/login",     to: 'sessions#new',     as: 'login'
   post "/sessions", to: "sessions#create",  as: 'sessions'
   post "/logout",   to: "sessions#destroy", as: 'logout'
-<<<<<<< Updated upstream
-=======
   get '/users/:id/save_dish', to: "users#save_dish", as: 'save_dish'
   get '/users/:id/save_restaurant', to: "users#save_restaurant", as: 'save_restaurant'
->>>>>>> Stashed changes
   get "/mytakeaways", to: 'static#mytakeaways', as: 'mytakeaways'
   patch "/dish_rating/:id", to: "dishes#add_rating", as: "dishes_rating"
   patch "/restaurant_rating/:id", to: "restaurants#add_rating", as: "restaurants_rating"
