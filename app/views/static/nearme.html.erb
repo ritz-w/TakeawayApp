@@ -1,0 +1,24 @@
+<div class="container">
+  <p>
+  <div class="row">
+      <h1>Restaurants nearby</h1>
+  </div>
+  <div class="row">
+    <div  class="col">
+      <% @google["results"].map do |restaurant| %>
+      <div class="row align-tiems-start">
+          <p><%= restaurant["name"]%></p>
+      </div>
+      <div class="row">
+          <p><%= restaurant["vicinity"]%></p><br>
+      </div>
+      <div class="row">
+          <p><% restaurant["geometry"]["location"]["lat"] %></p>
+      </div>
+      <div class="row">
+          <p><% restaurant["geometry"]["location"]["lng"] %></p>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

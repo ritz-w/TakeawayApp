@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   post "/sessions", to: "sessions#create",  as: 'sessions'
   post "/logout",   to: "sessions#destroy", as: 'logout'
   root :to => 'static#index'
+  get "/nearme", to: "static#nearme"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
