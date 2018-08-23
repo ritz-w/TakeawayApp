@@ -1,3 +1,40 @@
 // Place all the styles related to the dishes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+//show page
+.image {
+  border: 5px solid;
+  width: 90%;
+}
+
+.col-sm {
+  padding: 5%;
+}
+
+.restaurants-list-header {
+  margin-top: 3%;
+}
+
+// index page
+.horizontal-scroll {
+  overflow-x: auto;
+}
+
+.card {
+  min-height: 325px;
+  background-color: #d0da69;
+  border: 2px solid black;
+}
+
+
+.card-img {
+  height: 70%;
+  border: 2px solid black;
+}
+
+.dish-link {
+  position: absolute;
+  padding-top: 12%;
+  padding-left: 5%;
+}

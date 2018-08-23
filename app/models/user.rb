@@ -3,8 +3,10 @@ require 'httparty'
 
 class User < ApplicationRecord
   include HTTParty
-  has_and_belongs_to_many :restaurants
-  has_and_belongs_to_many :dishes
+  has_many :restaurants_ratings
+  has_many :dishes_ratings
+  has_many :restaurants, through: :restaurants_ratings
+  has_many :dishes, through: :dishes_ratings
   validates :username, uniqueness: true, presence: true
   has_secure_password
 

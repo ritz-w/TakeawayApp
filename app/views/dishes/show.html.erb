@@ -1,16 +1,106 @@
-<h1><%= @dish.name %></h1>
-<p>
-<div><%= image_tag "https://loremflickr.com/320/240/#{@dish.name.split.join(",")}" %></div>
-
-<%= @dish.description %>
-
-<%= form_for @dish, method: :delete do |f| %>
-	<%= f.submit "Delete Dish" %>
+<div class="row dish-restaurant-nav">
+	<div class="icon-container">
+		<a href=<%= dishes_path %>>
+		<h1><span class="fas fa-arrow-circle-left"></h1>
+			<span class="my-text">Back to all Dishes</span>
+		</a>
+	</div>
+	<% if logged_in? && current_user.admin? %>
+		<div class="icon-container">
+			<a href=<%= edit_dish_path(@dish) %>>
+			<h1><span class="far fa-edit"></h1>
+			<span class="my-text">Edit Dish</span>
+			</a>
+		</div>
+		<div class="icon-container">
+			<a href="/dishes/<%=@dish.id%>" data-method="delete">
+			<h1><span class="far fa-trash-alt"></h1>
+			<span class="my-text">Delete Dish</span>
+			</a>
+		</div>
+		<% end %>
+	<% if logged_in? %>
+		<% if current_user.dishes.include?(@dish) %>
+		<div class="icon-container">
+			<a href=<%= save_dish_path %>>
+			<h1><span class="fas fa-star"></h1>
+			<span class="my-text">Unsave dish?</span>
+			</a>
+		</div>
+		<% else %>
+		<div class="icon-container">
+			<a href=<%= save_dish_path %>>
+			<h1><span class="far fa-star"></h1>
+			<span class="my-text">Save this dish</span>
+			</a>
+		</div>
+		<% end %>
+	<% end %>
+</div>
+<div class="container">
+	<div class="row title">
+		<h1><%= @dish.name %></h1>
+	</div>
+	<div class="row">
+		<div	class="col-md-6">
+		<img class="image" id="imgClickAndChange" alt="" src="<%= @dish.photo_1 %>" onclick="changeImage()" >
+		</div>
+		<div class="col-md-6">
+			<div class="row rating-row">
+				<% if current_user.dishes.include?(@dish) %>
+			<div class="form-group">
+				<%= form_for @rating do |f| %>
+				<div id='star-rating'></div>
+		</div>
+		<%= f.submit "➜", class: "rating-send-button" %>
+		<% end %>
 <% end %>
+		</div>
+			<p>Main Region: <%= @dish.region %> </p>
+			<%= @dish.description %>
+			<br />
+			<br />
+			<h5>Average Rating: <%= @dish.average_rating %> / 5</h5>
+			<h5>Saved <%= @dish.saves %> times</h5>
+		</div>
+	</div><p>
+		<div class="row">
+			<h2 class="restaurants-list-header">Restaurants with this dish</h2>
+		</div>
+			<div class="row">
+				<ol>
+					<% @restaurants_with_dish.each do |restaurant| %>
+						<h4><li><%= link_to restaurant.name, restaurant_path(restaurant) %> , <%= restaurant.postcode %> <% if logged_in? %> (<%=restaurant.proximity_to_user(current_user).round(2) %> km)<% end %></li></h4>
+					<% end %>
+				</ol>
+			</div>
+	</div>
+</div>
 
-<%= link_to "Edit Dish", edit_dish_path(@dish) %><br>
-<%= link_to "Back to Dishes", dishes_path%>
+<% if current_user.dishes.include?(@dish) %>
+<script language="javascript">
+	var num = 0;
 
+	setInterval (function changeImage() {
+		var images = ["<%= @dish.photo_1 %>", "<%= @dish.photo_2 %>", "<%= @dish.photo_3 %>"]
+	    var len = images.length;
+			let img = document.getElementById("imgClickAndChange")
+	    img.src = images[num++];
+	    if (num == len) {
+	        num = 0;
+		};
+	}, 4000);
 
-<!-- Is there a better way to display photos? Maybe scrape google images and set the query to return 3 images max to display in show page? -->
-<!-- Note to SELF!!! - if you change way photos are displayed, return to database and delete unused attribute columns -->
+	$('div#star-rating').raty({
+		path: '/assets/',
+		score:
+		function() {
+			<% if !!@rating.rating && @rating.rating > 0 %>
+				return <%= @rating.rating %>
+			<% else %>
+					return $(this).attr('data-score');
+			<% end %>
+		},
+	});
+</script>
+<% end %>
