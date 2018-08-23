@@ -37,7 +37,16 @@ footer {
 .dropdown-menu {
   right: 0;
   left: auto;
+  background-color: #fdb12a;
+  border: 2px solid black;
 }
+
+
+.dropdown-item:hover{
+  background-color: #d0da69;
+  color: black;
+}
+
 
 //welcome page
 .welcome-section {
@@ -136,6 +145,7 @@ footer {
 
 .title {
   margin-bottom: 3%;
+  margin-top: 3%;
 }
 
 .rating-row {

@@ -8,9 +8,6 @@ class Dish < ApplicationRecord
     DishesRating.all.order("rating desc").limit(3).map {|rating| rating.dish}
   end
 
-  def save_dish
-  end
-
   def saves
     DishesRating.all.select{ |dish| dish.dish_id == self.id}.count
   end
@@ -22,5 +19,11 @@ class Dish < ApplicationRecord
     else
       return 0
     end
+  end
+
+  def get_coordinates_of_region
+    chinese_region = self.region
+    result = Geocoder.search(chinese_region)
+    result.first.coordinates
   end
 end

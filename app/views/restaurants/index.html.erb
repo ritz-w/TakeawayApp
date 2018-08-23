@@ -17,9 +17,10 @@
       <div id="all-restaurants-map-container" ></div>
     </div>
     <script type="text/javascript">
-        var locations = <%= raw @restaurants.map {|restaurant| [restaurant.name, restaurant.get_coordinates[0], restaurant.get_coordinates[1]]} %>;
+        var locations = <%= raw @restaurants.map {|restaurant| [restaurant.name, restaurant.get_coordinates[0], restaurant.get_coordinates[1], restaurant.id, restaurant.address]} %>;
         console.log(locations);
         function initMap() {
+
 
             var map = new google.maps.Map(document.getElementById('all-restaurants-map-container'), {
                 zoom: 12,
@@ -39,7 +40,16 @@
 
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        infowindow.setContent(locations[i][0]);
+                      var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h5 id="firstHeading" class="firstHeading">'+locations[i][0]+'</h5>'+
+                      '<div id="bodyContent">'+
+                      `<p> <a href="/restaurants/${locations[i][3]}">
+                      ${locations[i][4]}</a>`+
+                      '</div>'+
+                      '</div>';
+                        infowindow.setContent(contentString);
                         infowindow.open(map, marker);
                     }
                 })(marker, i));
@@ -50,8 +60,5 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWHIVYglIX-UITv9CS6aXjTkrfL7Zm200&callback=initMap">
     </script>
 
-    <% @restaurants.each do |restaurant| %>
-    <h3><%= restaurant.name %> </h3>
-    <% end %>
   </div>
 </div>

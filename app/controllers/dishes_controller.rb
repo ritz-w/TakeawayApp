@@ -28,6 +28,10 @@ class DishesController < ApplicationController
     redirect_to dish_path(rating.dish)
   end
 
+  def regional
+    @dishes = Dish.all
+  end
+
   def edit
     @dish = Dish.find(params[:id])
   end

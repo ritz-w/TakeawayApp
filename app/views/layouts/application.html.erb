@@ -27,8 +27,6 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <%= link_to 'All Takeaways', restaurants_path, class: "dropdown-item" %>
-          <a class="dropdown-item" href="#">Takeaways Near You</a>
-          <a class="dropdown-item" href="#">Takeaways By Regional Cuisine</a>
           <%= link_to 'My Closest Takeaways', mytakeaways_path, class: "dropdown-item" %>
         </div>
       </li>
@@ -38,7 +36,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to 'All Dishes', dishes_path, class: "dropdown-item" %>
-            <a class="dropdown-item" href="#">Dishes By Regional Cuisine</a>
+            <%= link_to 'Dishes by Regional Cuisine', regional_path, class: "dropdown-item" %>
           </div>
         </li>
         <% if logged_in? %>

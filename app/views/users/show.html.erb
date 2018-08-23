@@ -53,11 +53,7 @@
       <h2>Saved dishes: </h2>
       <ol>
         <% @user.dishes.each do |dish| %>
-<<<<<<< Updated upstream
-        <li><%= dish.name %></li>
-=======
         <li><%= link_to dish.name, dish_path(dish) %> (Your rating: <%= @user.dishes_ratings.find_by(dish_id: dish.id).rating > 0 ? @user.dishes_ratings.find_by(dish_id: dish.id).rating : "Not yet rated"  %>) </li>
->>>>>>> Stashed changes
         <% end %>
       </ol>
     </div>
