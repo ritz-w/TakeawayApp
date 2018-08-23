@@ -12,7 +12,7 @@
   <% @dishes.each do |dish| %>
   <div class="row">
     <div class="col">
-      <%= image_tag "https://loremflickr.com/220/140/#{dish.name.split.join(",")}", class: "image" %>
+      <%= dish.photo_1 %>
     </div>
     <div class="col">
       <%= link_to dish.name, dish_path(dish)%><p>

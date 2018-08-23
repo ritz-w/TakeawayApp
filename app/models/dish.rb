@@ -5,4 +5,7 @@ class Dish < ApplicationRecord
   def self.top_three
     Dish.all.order("rating desc").limit(3)
   end
+
+  def save_dish
+  end
 end

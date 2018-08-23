@@ -43,7 +43,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'wikipedia-client'
   gem 'httparty'
-
 end
 
 group :development do

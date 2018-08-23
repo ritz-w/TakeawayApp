@@ -53,7 +53,7 @@
       <h2>Saved dishes: </h2>
       <ol>
         <% @user.dishes.each do |dish| %>
-        <li><%= dish.name %></li>
+        <li><%= link_to dish.name, dish_path(dish) %></li>
         <% end %>
       </ol>
     </div>

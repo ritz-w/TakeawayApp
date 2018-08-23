@@ -72,3 +72,21 @@ footer {
 .carousel-caption {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
 }
+
+//icon styling
+
+.icon-container {
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+}
+
+.icon-container a {
+  color: black;
+}
+
+
+.my-text {
+  display: block;
+  font-family: 'Baloo Bhai', sans-serif;
+}
