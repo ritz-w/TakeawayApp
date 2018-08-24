@@ -17,12 +17,12 @@ class Restaurant < ApplicationRecord
     end
 
     def get_coordinates
-      url = "https://api.postcodes.io/postcodes/" + self.postcode.gsub(/\s+/, "").downcase
-      response = HTTParty.get(url).parsed_response
-      result = []
-      result << response["result"]["latitude"]
-      result << response["result"]["longitude"]
-      result
+        url = "https://api.postcodes.io/postcodes/" + self.postcode.gsub(/\s+/, "").downcase
+        response = HTTParty.get(url).parsed_response
+        result = []
+        result << response["result"]["latitude"]
+        result << response["result"]["longitude"]
+        result
     end
 
     def saves

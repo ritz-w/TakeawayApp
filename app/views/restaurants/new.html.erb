@@ -1,46 +1,15 @@
-<div class="container full-form">
-  <div class="row">
-    <h1> Add new Restaurant </h1>
-</div>
-<% if @restaurant.errors.any? %>
-  <div id="error_explanation">
-    <p>There were some errors:</p>
-    <ul>
-      <% @restaurant.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
-  <p>
-  <div class="row">
-    <div class="col-6 text-center">
-<%= form_for @restaurant do |f| %>
-<%= f.label "Name: " %>
+<div class="container new-form">
+  <% if @restaurant.errors.any? %>
+    <div id="error_explanation">
+      <p>There were some errors:</p>
+      <ul>
+        <% @restaurant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
     </div>
-    <div class="col">
-<%= f.text_field :name %><p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6 text-center">
-<%= f.label "building number: "%>
-    </div>
-    <div class="col">
-    <%= f.number_field :number %><p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6 text-center">
-<%= f.label "Postcode: " %>
-    </div>
-  <div class="col">
-<%= f.text_field :postcode %><p>
-  </div>
-  </div>
-  <div class="row media-align-center">
-<%= f.submit "Add Restaurant" %>
-  </div>
-</div>
-<% end %>
+    <% end %>
+
+    <h1> New Restaurant </h1>
+  <%= render 'form' %>
 </div>

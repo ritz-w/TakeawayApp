@@ -1,35 +1,16 @@
-<h1> Edit Restaurant </h1>
+<div class="container new-form">
+  <% if @restaurant.errors.any? %>
+    <div id="error_explanation">
+      <p>There were some errors:</p>
+      <ul>
+        <% @restaurant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
 
-<% if @restaurant.errors.any? %>
-  <div id="error_explanation">
-    <p>There were some errors:</p>
-    <ul>
-      <% @restaurant.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
-
-<%= form_for @restaurant do |f| %>
-<%= f.label "Name: " %>
-<%= f.text_field :name %><p>
-<%= f.label "building number: "%>
-<%= f.text_field :number %><p>
-<%= f.label "Postcode: " %>
-<%= f.text_field :postcode %><p>
-  <br>
-<%= f.collection_check_boxes(:dish_ids, Dish.all, :id, :name)%>
-<p><%= f.submit "Update Restaurant" %>
-<% end %>
-
-<%= form_for @restaurant, method: :delete do |f| %>
-	<%= f.submit "Delete Restaurant" %>
-<% end %>
+    <h1> Edit Restaurant </h1>
+  <%= render 'form' %>
 <p>
-<%= link_to "Back to Restaurant Page", restaurant_path(@restaurant)%>
-
-
-<!-- Building number (:number)needs validation as integer -->
-<!-- Postcode and name need to exist and name needs to be unique for postcode and number -->
-<!-- Have cuisine attribute, alongside region to show unique dishes for different cuisines?-->
+</div>

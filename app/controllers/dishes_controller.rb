@@ -17,7 +17,6 @@ class DishesController < ApplicationController
 
   def create
     @dish = Dish.create(dish_params(:name, :description, :region, :rating, :image_url, :photo_1, :photo_2, :photo_3))
-
     redirect_to dish_path(@dish)
   end
 
@@ -37,7 +36,7 @@ class DishesController < ApplicationController
 
   def update
     @dish = Dish.find(params[:id])
-    @dish.update(dish_params(:name, :description, :region, :rating, :image_url, :photo_1, :photo_2, :photo_3))
+    @dish.update(dish_params)
     redirect_to dish_path(@dish)
   end
 
@@ -48,8 +47,8 @@ class DishesController < ApplicationController
 
   private
 
-  def dish_params(*args)
-    params.require(:dish).permit(*args)
+  def dish_params
+    params.require(:dish).permit(:name, :description, :region, :photo_1, :photo_2, :photo_3, restaurant_ids: [])
   end
 
 end

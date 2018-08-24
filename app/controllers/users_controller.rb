@@ -21,7 +21,6 @@ class UsersController < ApplicationController
 
   def edit
   authorized_for(params[:id])
-  is_admin?
   @user = User.find(params[:id])
   end
 

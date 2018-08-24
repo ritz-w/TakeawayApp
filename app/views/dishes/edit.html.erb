@@ -1,7 +1,4 @@
-<div class="container">
-  <p>
-<h1> Edit Dish </h1>
-<p>
+<div class="container new-form">
 <% if @dish.errors.any? %>
   <div id="error_explanation">
     <p>There were some errors:</p>
@@ -12,27 +9,6 @@
     </ul>
   </div>
   <% end %>
-<p>
-<%= form_for @dish do |f| %>
-<%= f.label "Name: " %>
-<%= f.text_field :name %><p>
-  <p>
-<%= f.label "Description: "%><br>
-<%= f.text_area :description%><p>
-  <div class="row">
-    <div class="col">
-<%= f.submit "Update Dish"%>
-<% end %>
-  </div>
-  <div class="col">
-  <%= form_for @dish, method: :delete do |f| %>
-  	<%= f.submit "Delete Dish" %>
-  <% end %>
-  </div>
-  <div class="col">
-  <%= link_to "Back to Dish Page", dish_path(@dish)%>
-  </div>
+  <h1> Edit Dish </h1>
+<%= render 'form' %>
 </div>
-</div>
-<!-- Building number (:number)needs validation as integer -->
-<!-- Postcode and name need to exist and name needs to be unique for postcode and number -->

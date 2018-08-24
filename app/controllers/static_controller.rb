@@ -7,7 +7,12 @@ class StaticController < ApplicationController
   end
 
   def mytakeaways
-    @nearest_restaurants = current_user.nearest_restaurants
+    if !logged_in?
+      flash[:authorized] = "Sorry! You must login to access the closest takeaways feature."
+      redirect_to restaurants_path
+    else
+      @nearest_restaurants = current_user.nearest_restaurants
+    end
   end
 
   private

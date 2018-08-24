@@ -1,0 +1,38 @@
+<div class="container">
+  <%= form_for @dish do |f| %>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="region">Region</label>
+    <%= f.text_field :region, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="region">Description</label>
+    <%= f.text_area :description, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="photo_1">Photo 1</label>
+    <%= f.text_field :photo_1, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="photo_2">Photo 2</label>
+    <%= f.text_field :photo_2, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="photo_3">Photo 3</label>
+    <%= f.text_field :photo_3, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <label for="photo_3">Restaurants</label><br>
+    <%= f.collection_check_boxes(:restaurant_ids, Restaurant.all, :id, :name)%>
+  </div>
+  <br>
+  <%= f.submit :class => "btn btn-primary" %>
+  <% end %>
+</div>
+
+<!-- Building number (:number)needs validation as integer -->
+<!-- Postcode and name need to exist and name needs to be unique for postcode and number -->
+<!-- Have cuisine attribute, alongside region to show unique dishes for different cuisines?-->

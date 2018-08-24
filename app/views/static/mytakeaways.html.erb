@@ -9,9 +9,6 @@
       <h3><%= link_to restaurant.name, restaurant_path(restaurant) %></h3>
       <h5><%= restaurant.proximity_to_user(current_user).round(2) %> km</h5>
       <p><%= restaurant.address %></p>
-      <p><%= restaurant.proximity_to_user(current_user) %> km from you!</p>
-      <p><%= restaurant.get_coordinates %></p>
-      <p><%= current_user.get_coordinates %></p>
     </div>
     <div class="col-md-6">
       <div class="container closest-map-container" id="closest-map-<%= index %>">

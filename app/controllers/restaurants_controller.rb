@@ -1,7 +1,7 @@
 class RestaurantsController < ApplicationController
 
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.all.select {|r| r.postcode.length > 4}
   end
 
   def show
@@ -33,7 +33,7 @@ class RestaurantsController < ApplicationController
   def update
     @restaurant = Restaurant.find(params[:id])
     @restaurant.update(restaurant_params)
-
+    byebug
     redirect_to restaurant_path(@restaurant)
   end
 
