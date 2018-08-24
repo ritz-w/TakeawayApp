@@ -45,7 +45,9 @@ class AnalyticsController < ApplicationController
 
     dish_hash.select! {|key, value| value != [] }
 
-
+    if dish_hash == {}
+      return
+    else
     dish_hash.each do |k,v|
       v.each do |value|
           if !!region_hash[value]
@@ -55,10 +57,12 @@ class AnalyticsController < ApplicationController
           end
         end
       end
+      byebug
 
     @user_most_pop_region = region_hash.max_by{|k,v| v}[0]
+    end
   end
-
+  
   def user_most_dish_var
 
     dish_hash ={}
