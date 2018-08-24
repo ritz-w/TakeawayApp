@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 2018_08_23_091057) do
     t.string "name"
     t.string "description"
     t.string "region"
-    t.integer "rating"
     t.string "photo_1"
     t.string "photo_2"
     t.string "photo_3"
@@ -25,13 +24,14 @@ ActiveRecord::Schema.define(version: 2018_08_23_091057) do
     t.text "img_url"
   end
 
-  create_table "dishes_restaurants", id: false, force: :cascade do |t|
-    t.integer "restaurant_id"
+  create_table "dishes_ratings", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "dish_id"
+    t.integer "rating"
   end
 
-  create_table "dishes_users", id: false, force: :cascade do |t|
-    t.integer "user_id"
+  create_table "dishes_restaurants", id: false, force: :cascade do |t|
+    t.integer "restaurant_id"
     t.integer "dish_id"
     t.integer "rating"
   end
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 2018_08_23_091057) do
     t.string "name"
     t.string "address"
     t.string "postcode"
-    t.integer "rating"
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,7 +48,7 @@ ActiveRecord::Schema.define(version: 2018_08_23_091057) do
     t.text "number"
   end
 
-  create_table "restaurants_users", id: false, force: :cascade do |t|
+  create_table "restaurants_ratings", force: :cascade do |t|
     t.integer "user_id"
     t.integer "restaurant_id"
     t.integer "rating"

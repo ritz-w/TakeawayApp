@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <div class="row dish-nav">
+=======
+<div class="row dish-restaurant-nav">
+>>>>>>> ritz
 	<div class="icon-container">
 		<a href=<%= dishes_path %>>
 		<h1><span class="fas fa-arrow-circle-left"></h1>
@@ -19,7 +23,8 @@
 			</a>
 		</div>
 		<% end %>
-	<% if current_user.dishes.include?(@dish) %>
+	<% if logged_in? %>
+		<% if current_user.dishes.include?(@dish) %>
 		<div class="icon-container">
 			<a href=<%= save_dish_path %>>
 			<h1><span class="fas fa-star"></h1>
@@ -34,6 +39,7 @@
 			</a>
 		</div>
 		<% end %>
+	<% end %>
 </div>
 <div class="container">
 	<div class="row title">
@@ -41,34 +47,45 @@
 	</div>
 	<div class="row">
 		<div	class="col-md-6">
-
-
 		<img class="image" id="imgClickAndChange" alt="" src="<%= @dish.photo_1 %>" onclick="changeImage()" >
-
-
 		</div>
 		<div class="col-md-6">
 			<div class="row rating-row">
+				<% if current_user.dishes.include?(@dish) %>
 			<div class="form-group">
-				<%= form_for @dish do |f| %>
+				<%= form_for @rating do |f| %>
 				<div id='star-rating'></div>
-				<% end %>
 		</div>
+		<%= f.submit "➜", class: "rating-send-button" %>
+		<% end %>
+<% end %>
 		</div>
 			<p>Main Region: <%= @dish.region %> </p>
 			<%= @dish.description %>
+			<br />
+			<br />
+			<h5>Average Rating: <%= @dish.average_rating %> / 5</h5>
+			<h5>Saved <%= @dish.saves %> times</h5>
 		</div>
 	</div><p>
 		<div class="row">
-			<h2>Restaurants with this dish</h2>
+			<h2 class="restaurants-list-header">Restaurants with this dish</h2>
 		</div>
+			<div class="row">
+				<ol>
+					<% @restaurants_with_dish.each do |restaurant| %>
+						<h4><li><%= link_to restaurant.name, restaurant_path(restaurant) %> , <%= restaurant.postcode %> <% if logged_in? %> (<%=restaurant.proximity_to_user(current_user).round(2) %> km)<% end %></li></h4>
+					<% end %>
+				</ol>
+			</div>
 	</div>
 </div>
 
+<% if current_user.dishes.include?(@dish) %>
 <script language="javascript">
 	var num = 0;
 
-	function changeImage() {
+	setInterval (function changeImage() {
 		var images = ["<%= @dish.photo_1 %>", "<%= @dish.photo_2 %>", "<%= @dish.photo_3 %>"]
 	    var len = images.length;
 			let img = document.getElementById("imgClickAndChange")
@@ -76,13 +93,18 @@
 	    if (num == len) {
 	        num = 0;
 		};
-	}
+	}, 4000);
 
 	$('div#star-rating').raty({
 		path: '/assets/',
-		score: function() {
+		score:
+		function() {
+			<% if !!@rating.rating && @rating.rating > 0 %>
+				return <%= @rating.rating %>
+			<% else %>
 					return $(this).attr('data-score');
-		scoreName: 'dish[rating]'
-	}
+			<% end %>
+		},
 	});
 </script>
+<% end %>

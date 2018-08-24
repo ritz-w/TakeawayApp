@@ -6,6 +6,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @rating = RestaurantsRating.find_by(user_id: current_user.id, restaurant_id: @restaurant.id)
     @address = Geocoder.search(@restaurant.postcode)
   end
 
@@ -14,7 +15,6 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    byebug
     @restaurant = Restaurant.create(restaurant_params)
 
     redirect_to restaurant_path(@restaurant)
@@ -22,6 +22,13 @@ class RestaurantsController < ApplicationController
 
   def edit
     @restaurant = Restaurant.find(params[:id])
+  end
+
+  def add_rating
+    byebug
+    rating = RestaurantsRating.find(params[:id])
+    rating.update(rating: params["score"])
+    redirect_to restaurant_path(rating.restaurant)
   end
 
   def update

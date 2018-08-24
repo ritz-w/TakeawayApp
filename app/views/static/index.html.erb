@@ -1,7 +1,7 @@
 
   <div class="container welcome-section">
     <h3 class="welcome-message-text">飽了嗎？ // Are you full?</h3>
-      <p>Bao le! is a site for fans of Chinese fast food. We have taken all the Chinese takeaways in London and turned them into an interactive database where you can search by dish, regional specialties, and location.
+      <p>Bao le ma?! is a site for fans of Chinese fast food. We have taken all the Chinese takeaways in London and turned them into an interactive database where you can search by dish, regional specialties, and location.
       <br><br>You can also create your own profile to save, comment on, and rate your favourite takeaways and dishes.</p>
   </div>
 
@@ -33,4 +33,45 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+  </div>
+
+  <div class="container map-section">
+    <h3>Featured: The 3 Top Rated Takeaways</h3>
+    <!--The div element for the map -->
+    <div class="container map-shell">
+      <div id="featured-restaurants-map-container" ></div>
+    </div>
+    <script type="text/javascript">
+        var locations = <%= raw Restaurant.top_three.map {|restaurant| [restaurant.name, restaurant.get_coordinates[0], restaurant.get_coordinates[1]]} %>;
+        console.log(locations);
+        function initMap() {
+
+            var map = new google.maps.Map(document.getElementById('featured-restaurants-map-container'), {
+                zoom: 12,
+                center: new google.maps.LatLng(51.5138, -0.15),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(locations[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+        }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWHIVYglIX-UITv9CS6aXjTkrfL7Zm200&callback=initMap">
+    </script>
   </div>

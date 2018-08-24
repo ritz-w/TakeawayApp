@@ -20,6 +20,7 @@
 // = require popper
 // = require bootstrap
 // = require_tree .
+
 /*!
  * jQuery Raty - A Star Rating Plugin
  *
@@ -30,8 +31,6 @@
  * version: 2.8.0
  *
  */
- console.log("hi there");
-
 
 (function($) {
   'use strict';
@@ -737,7 +736,7 @@
       });
     }
   };
-  console.log("the function");
+
   $.fn.raty = function(method) {
     if (methods[method]) {
       return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -784,4 +783,4 @@
     targetText:   '',
     targetType:   'hint'
   };
-})($);
+})(jQuery);

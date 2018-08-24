@@ -1,22 +1,113 @@
-<h1><%= @restaurant.name %></h1><br>
-<%= "#{@restaurant.number},  #{@restaurant.address.split(",")[2]}, #{@restaurant.postcode}" %><br>
-<%= "#{@restaurant.phone_number}" %>
-<% @restaurant.latitude %>
-<% @restaurant.longitude %>
-<p>
+<div class="row dish-restaurant-nav">
+	<div class="icon-container">
+		<a href=<%= restaurants_path %>>
+		<h1><span class="fas fa-arrow-circle-left"></h1>
+			<span class="my-text">Back to all Restaurants</span>
+		</a>
+	</div>
+	<% if logged_in? && current_user.admin? %>
+		<div class="icon-container">
+			<a href=<%= edit_restaurant_path(@restaurant) %>>
+			<h1><span class="far fa-edit"></h1>
+			<span class="my-text">Edit Restaurant</span>
+			</a>
+		</div>
+		<div class="icon-container">
+			<a href="/dishes/<%=@restaurant.id%>" data-method="delete">
+			<h1><span class="far fa-trash-alt"></h1>
+			<span class="my-text">Delete Restaurant</span>
+			</a>
+		</div>
+		<% end %>
+	<% if logged_in? %>
+		<% if current_user.restaurants.include?(@restaurant) %>
+		<div class="icon-container">
+			<a href=<%= save_restaurant_path %>>
+			<h1><span class="fas fa-star"></h1>
+			<span class="my-text">Unsave restaurant?</span>
+			</a>
+		</div>
+		<% else %>
+		<div class="icon-container">
+			<a href=<%= save_restaurant_path %>>
+			<h1><span class="far fa-star"></h1>
+			<span class="my-text">Save this restaurant</span>
+			</a>
+		</div>
+		<% end %>
+	<% end %>
+</div>
+<div class="container">
+	<div class="row title">
+		<h1><%= @restaurant.name %></h1>
+	</div>
+	<div class="row">
+		<div	class="col-md-6">
+      <!--The div element for the map -->
+      <div class="container" id="map-container">
+      </div>
+      <script>
+          // Initialize and add the map
+          function initMap() {
+            // The location of Uluru
+            var place = {lat: <%= @restaurant.get_coordinates[0] %> , lng: <%= @restaurant.get_coordinates[1] %>};
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map-container'), {zoom: 12, center: place});
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({position: place, map: map});
+          }
+      </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWHIVYglIX-UITv9CS6aXjTkrfL7Zm200&callback=initMap">
+      </script>
+		</div>
+		<div class="col-md-6">
+			<div class="row rating-row">
+				<% if current_user.restaurants.include?(@restaurant) %>
+			<div class="form-group">
+				<%= form_for @rating do |f| %>
+				<div id='star-rating'></div>
+		</div>
+		<%= f.submit "➜", class: "rating-send-button" %>
+		<% end %>
+<% end %>
+		</div>
+		<h5>Contact</h5>
+    <%= "#{@restaurant.address.split(",")[1]}  #{@restaurant.address.split(",")[2]}, #{@restaurant.postcode}" %><br>
+    <%= "#{@restaurant.phone_number}" %>
+		<br />
+		<br />
+		<h5>Average Rating: <%= @restaurant.average_rating %> / 5</h5>
+		<h5>Saved <%= @restaurant.saves %> times</h5>
+		</div>
+	</div><p>
+		<div class="row">
+			<h2 class="restaurants-list-header">Menu</h2>
+		</div>
+			<div class="row">
+				<ol>
+					<% @restaurant.dishes.each do |dish| %>
+						<h4><li><%= link_to dish.name, dish_path(dish) %></li></h4>
+					<% end %>
+				</ol>
+			</div>
+	</div>
+</div>
 
-<% if @restaurant.dishes != [] %>
-  <p>Dishes on menu:</p>
-    <% @restaurant.dishes.each do |dish| %>
-    <span><%= link_to dish.name, dish_path(dish) %> | <%= dish.region %><br>
-    <% end %>
-<% else %>
-  <p>This restaurant doesnt currently have a menu...</p>
+<% if current_user.restaurants.include?(@restaurant) %>
+<script language="javascript">
+
+	$('div#star-rating').raty({
+		path: '/assets/',
+		score:
+		function() {
+			<% if !!@rating.rating && @rating.rating > 0 %>
+				return <%= @rating.rating %>
+			<% else %>
+					return $(this).attr('data-score');
+			<% end %>
+		},
+	});
+</script>
 <% end %>
-<p>
-<%= form_for @restaurant, method: :delete do |f| %>
-	<%= f.submit "Delete Restaurant" %>
-<% end %>
-<p>
-<%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %><p>
-<%= link_to "Back to Restaurants", restaurants_path%>

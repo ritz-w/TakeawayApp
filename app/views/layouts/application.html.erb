@@ -8,7 +8,8 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|M+PLUS+Rounded+1c" rel="stylesheet">
-    <link href="//use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
 
   </head>
 
@@ -26,8 +27,6 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <%= link_to 'All Takeaways', restaurants_path, class: "dropdown-item" %>
-          <a class="dropdown-item" href="#">Takeaways Near You</a>
-          <a class="dropdown-item" href="#">Takeaways By Regional Cuisine</a>
           <%= link_to 'My Closest Takeaways', mytakeaways_path, class: "dropdown-item" %>
         </div>
       </li>
@@ -37,7 +36,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to 'All Dishes', dishes_path, class: "dropdown-item" %>
-            <a class="dropdown-item" href="#">Dishes By Regional Cuisine</a>
+            <%= link_to 'Dishes by Regional Cuisine', regional_path, class: "dropdown-item" %>
           </div>
         </li>
         <% if logged_in? %>

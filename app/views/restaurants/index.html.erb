@@ -1,5 +1,64 @@
-<h1> Restaurants </h1>
+<div class="container">
+  <div class="row dish-restaurant-index-nav">
+  	<% if logged_in? && current_user.admin? %>
+  		<div class="icon-container">
+  			<a href=<%= new_restaurant_path(@restaurant) %>>
+  			<h1><span class="fas fa-plus-circle"></h1>
+  			<span class="my-text">Create New Restaurant</span>
+  			</a>
+  		</div>
+  		<% end %>
+  </div>
+    <div class="row index-dishes-restaurant-titles">
+      <h1> All Takeaways </h1>
+    </div>
 
-<% @restaurants.each do |restaurant| %>
-  <p><%= link_to restaurant.name, restaurant_path(restaurant)%></p>
-<% end %>
+    <div class="container all-restaurants-map-shell">
+      <div id="all-restaurants-map-container" ></div>
+    </div>
+    <script type="text/javascript">
+        var locations = <%= raw @restaurants.map {|restaurant| [restaurant.name, restaurant.get_coordinates[0], restaurant.get_coordinates[1], restaurant.id, restaurant.address]} %>;
+        console.log(locations);
+        function initMap() {
+
+
+            var map = new google.maps.Map(document.getElementById('all-restaurants-map-container'), {
+                zoom: 12,
+                center: new google.maps.LatLng(51.5138, -0.15),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                      var contentString = '<div id="content">'+
+                      '<div id="siteNotice">'+
+                      '</div>'+
+                      '<h5 id="firstHeading" class="firstHeading">'+locations[i][0]+'</h5>'+
+                      '<div id="bodyContent">'+
+                      `<p> <a href="/restaurants/${locations[i][3]}">
+                      ${locations[i][4]}</a>`+
+                      '</div>'+
+                      '</div>';
+                        infowindow.setContent(contentString);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+        }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWHIVYglIX-UITv9CS6aXjTkrfL7Zm200&callback=initMap">
+    </script>
+
+  </div>
+</div>

@@ -1,22 +1,27 @@
 <div class="container">
-  <p>
-  <div class="row">
-    <div class="col">
-      <h1> Dishes </h1>
-      <p>
+  <div class="row dish-restaurant-index-nav">
+  	<% if logged_in? && current_user.admin? %>
+  		<div class="icon-container">
+  			<a href=<%= new_dish_path(@dish) %>>
+  			<h1><span class="fas fa-plus-circle"></h1>
+  			<span class="my-text">Create New Dish</span>
+  			</a>
+  		</div>
+  		<% end %>
+  </div>
+  <div class="container-fluid horizontal-scroll">
+    <div class="row index-dishes-restaurant-titles">
+      <h1> All Dishes </h1>
     </div>
-    <div class="col">
-      <%= link_to "Create new dish", new_dish_path, :class => "btn btn-primary"  %><p>
+    <div class="row flex-row flex-nowrap">
+      <% @dishes.each do |dish| %>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+          <div class="card card-block">
+            <%= image_tag dish.photo_1, :class => "card-img" %>
+          <h4><%= link_to dish.name, dish_path(dish), class: "dish-link" %></h4>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-  <% @dishes.each do |dish| %>
-  <div class="row">
-    <div class="col">
-      <%= dish.photo_1 %>
-    </div>
-    <div class="col">
-      <%= link_to dish.name, dish_path(dish)%><p>
-    </div>
-  </div><p>
-  <% end %>
 </div>

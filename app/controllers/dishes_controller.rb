@@ -7,6 +7,8 @@ class DishesController < ApplicationController
   def show
     @dish = Dish.find(params[:id])
     @query = @dish.name
+    @rating = DishesRating.find_by(user_id: current_user.id, dish_id: @dish.id)
+    @restaurants_with_dish = Restaurant.all.select {|restaurant| restaurant.dishes.include?(@dish)}
   end
 
   def new
@@ -17,6 +19,16 @@ class DishesController < ApplicationController
     @dish = Dish.create(dish_params(:name, :description, :region, :rating, :image_url, :photo_1, :photo_2, :photo_3))
 
     redirect_to dish_path(@dish)
+  end
+
+  def add_rating
+    rating = DishesRating.find(params[:id])
+    rating.update(rating: params["score"])
+    redirect_to dish_path(rating.dish)
+  end
+
+  def regional
+    @dishes = Dish.all
   end
 
   def edit

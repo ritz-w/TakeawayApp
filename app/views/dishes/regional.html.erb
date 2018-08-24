@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row dish-restaurant-index-nav">
+  </div>
+    <div class="row index-dishes-restaurant-titles">
+      <h1> All Dishes </h1>
+    </div>
+    <div class="row index-dishes-restaurant-titles">
+      <h5>Click below to check out our collections of Chinese dishes by region.</h5>
+    </div>
+    <div class="row">
+      <div class="regional-map-shell">
+              <div id="regional-map-container" ></div>
+            </div>
+            <script type="text/javascript">
+                var locations = <%= raw @dishes.map {|dish| [dish.name, dish.get_coordinates_of_region[0], dish.get_coordinates_of_region[1], dish.id]} %>;
+                console.log(locations);
+                function initMap() {
+
+
+                    var map = new google.maps.Map(document.getElementById('regional-map-container'), {
+                        zoom: 5,
+                        center: new google.maps.LatLng(26.843, 107.2903),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+
+                    var infowindow = new google.maps.InfoWindow();
+
+                    var marker, i;
+
+                    for (i = 0; i < locations.length; i++) {
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                            map: map
+                        });
+
+                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                            return function () {
+                              var contentString = '<div id="content">'+
+                              '<div id="siteNotice">'+
+                              '</div>'+
+                              '<h5 id="firstHeading" class="firstHeading">'+locations[i][0]+'</h5>'+
+                              '<div id="bodyContent">'+
+                              `<p> <a href="/restaurants/${locations[i][3]}">
+                              ${locations[i][4]}</a>`+
+                              '</div>'+
+                              '</div>';
+                                infowindow.setContent(contentString);
+                                infowindow.open(map, marker);
+                            }
+                        })(marker, i));
+                    }
+                }
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWHIVYglIX-UITv9CS6aXjTkrfL7Zm200&callback=initMap">
+            </script>
+
+      </div>
+    </div>

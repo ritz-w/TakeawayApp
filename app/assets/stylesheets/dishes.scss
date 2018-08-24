@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+//show page
 .image {
   border: 5px solid;
   width: 90%;
@@ -11,20 +12,29 @@
   padding: 5%;
 }
 
-
-.title {
-  margin-bottom: 3%;
-}
-
-
-.dish-nav {
+.restaurants-list-header {
   margin-top: 3%;
-  overflow: hidden;
-  flex-flow: row-reverse;
-  margin-right: 3%;
+}
+
+// index page
+.horizontal-scroll {
+  overflow-x: auto;
+}
+
+.card {
+  min-height: 325px;
+  background-color: #d0da69;
+  border: 2px solid black;
 }
 
 
-.rating-row {
-  margin-left: 0px;
+.card-img {
+  height: 70%;
+  border: 2px solid black;
+}
+
+.dish-link {
+  position: absolute;
+  padding-top: 12%;
+  padding-left: 5%;
 }

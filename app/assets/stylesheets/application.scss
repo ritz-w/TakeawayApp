@@ -8,7 +8,7 @@ body {
   background-color: #ec624c;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   font-family: 'Baloo Bhai', 'M PLUS Rounded 1c', sans-serif;
 }
 
@@ -37,7 +37,16 @@ footer {
 .dropdown-menu {
   right: 0;
   left: auto;
+  background-color: #fdb12a;
+  border: 2px solid black;
 }
+
+
+.dropdown-item:hover{
+  background-color: #d0da69;
+  color: black;
+}
+
 
 //welcome page
 .welcome-section {
@@ -73,6 +82,21 @@ footer {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
 }
 
+// front page map
+
+.map-section {
+  margin-top: 5%;
+  width: 70%;
+}
+.map-shell {
+  width: 80%;
+  height: 300px;
+}
+
+#featured-restaurants-map-container {
+  width: 100%;
+  height: 100%;
+}
 //icon styling
 
 .icon-container {
@@ -89,4 +113,47 @@ footer {
 .my-text {
   display: block;
   font-family: 'Baloo Bhai', sans-serif;
+}
+
+
+#map-container {
+  position: relative;
+  height: 250px;
+  width: 100%;
+  border: 5px solid black;
+}
+
+//restaurant and dishes index page navigation
+.dish-restaurant-index-nav {
+  margin-top: 3%;
+  overflow: hidden;
+  flex-flow: row-reverse;
+  margin-right: 3%;
+}
+
+.index-dishes-restaurant-titles {
+  margin-bottom: 3%;
+}
+//restaurant and dishes show page rating and save navigation
+
+.dish-restaurant-nav {
+  margin-top: 3%;
+  overflow: hidden;
+  flex-flow: row-reverse;
+  margin-right: 3%;
+}
+
+.title {
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+
+.rating-row {
+  margin-left: 0px;
+}
+
+.rating-send-button {
+  height: 50%;
+  background: transparent;
+  border: transparent;
 }

@@ -44,7 +44,7 @@
     <h2>Saved restaurants: </h2>
       <ol>
         <% @user.restaurants.each do |restaurant| %>
-        <li><%= restaurant.name %></li>
+        <li><%= link_to restaurant.name, restaurant_path(restaurant) %> (Your rating: <%= !!@user.restaurants_ratings.find_by(restaurant: restaurant.id).rating ? @user.restaurants_ratings.find_by(restaurant: restaurant.id).rating : "Not yet rated" %>) </li>
         <% end %>
       </ol>
     </div>
@@ -53,7 +53,7 @@
       <h2>Saved dishes: </h2>
       <ol>
         <% @user.dishes.each do |dish| %>
-        <li><%= link_to dish.name, dish_path(dish) %></li>
+        <li><%= link_to dish.name, dish_path(dish) %> (Your rating: <%= @user.dishes_ratings.find_by(dish_id: dish.id).rating > 0 ? @user.dishes_ratings.find_by(dish_id: dish.id).rating : "Not yet rated"  %>) </li>
         <% end %>
       </ol>
     </div>
