@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get "/dishes_regional", to: 'dishes#regional', as: 'regional'
   patch "/dish_rating/:id", to: "dishes#add_rating", as: "dishes_rating"
   patch "/restaurant_rating/:id", to: "restaurants#add_rating", as: "restaurants_rating"
+  get "/analytics", to: 'analytics#index', as: 'analytics'
   root :to => 'static#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

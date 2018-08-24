@@ -21,6 +21,11 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
+      <% if admin? %>
+        <li class="nav-item nav-link">
+          <%= link_to "Analytics", analytics_path %>
+        </li>
+      <% end %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href='restaurants/index.html' id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Takeaways
