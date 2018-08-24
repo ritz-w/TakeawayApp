@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_091057) do
+ActiveRecord::Schema.define(version: 2018_08_21_143658) do
 
   create_table "dishes", force: :cascade do |t|
     t.string "name"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2018_08_23_091057) do
   create_table "dishes_restaurants", id: false, force: :cascade do |t|
     t.integer "restaurant_id"
     t.integer "dish_id"
-    t.integer "rating"
   end
 
   create_table "restaurants", force: :cascade do |t|

@@ -42,7 +42,7 @@ dish_names.each do |dish_name|
       images << json["query"]["pages"]["#{key}"]["imageinfo"][0]["url"]
     end
     img_jpg_urls = images.select {|img| img.include?(".JPG") || img.include?(".jpg")}
-    Dish.create(name: dish, description: wiki_page.summary, region: region, rating: 0, photo_1: img_jpg_urls.first, photo_2: img_jpg_urls.last)
+    Dish.create(name: dish, description: wiki_page.summary, region: region, photo_1: img_jpg_urls.first, photo_2: img_jpg_urls.last)
     img_jpg_urls << "https://loremflickr.com/320/240/#{dish.split.join(",")}"
     Dish.create(name: dish, description: wiki_page.summary, region: region, photo_1: img_jpg_urls[1], photo_2: img_jpg_urls[2], photo_3: img_jpg_urls.last)
   end
