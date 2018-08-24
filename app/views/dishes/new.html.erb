@@ -1,5 +1,6 @@
+<div class="container-fluid">
 <h1> Add new dish </h1>
-
+<p>
 <% if @dish.errors.any? %>
   <div id="error_explanation">
     <p>There were some errors:</p>
@@ -10,9 +11,12 @@
     </ul>
   </div>
   <% end %>
-
+<p>
   <%= form_for @dish do |f| %>
   <%= f.label "Name: " %>
   <%= f.text_field :name %><p>
+  <p>
   <%= f.submit "Add Dish" %>
+  <p>
   <% end %>
+</div>

@@ -59,6 +59,7 @@ class AnalyticsController < ApplicationController
     end
 
     @user_most_pop_region = region_hash.max_by{|k,v| v}[0]
+    end
   end
 
   def user_most_dish_var
