@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def edit
   authorized_for(params[:id])
+  is_admin?
   @user = User.find(params[:id])
   end
 
@@ -28,6 +29,23 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     redirect_to @user
+  end
+
+  def destroy
+    is_admin?
+  end
+  
+  def save_dish
+    @user = current_user
+    @dish = Dish.find(params[:id])
+    if @user.dishes.include?(@dish)
+      the_dish = @user.dishes.find(@dish.id)
+      @user.dishes.delete(the_dish)
+    else
+      @user.dishes << @dish
+      @user.save
+    end
+    redirect_to dish_path(@dish)
   end
 
   private

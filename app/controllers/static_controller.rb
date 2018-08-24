@@ -6,7 +6,7 @@ class StaticController < ApplicationController
   def index
   end
 
-  def nearme
+  def mytakeaways
     if current_user.id == nil
       @google = "Please log in to use this feature"
     else
@@ -25,10 +25,10 @@ class StaticController < ApplicationController
       @google = JSON.parse(response)
     end
   end
-end
 
-private
+  private
 
-def geounits
-  "#{@postcode["result"]["latitude"]},#{@postcode["result"]["longitude"]}"
+  def geounits
+    "#{@postcode["result"]["latitude"]},#{@postcode["result"]["longitude"]}"
+  end
 end

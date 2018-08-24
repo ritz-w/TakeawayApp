@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get "/login",     to: 'sessions#new',     as: 'login'
   post "/sessions", to: "sessions#create",  as: 'sessions'
   post "/logout",   to: "sessions#destroy", as: 'logout'
+  get '/users/:id/save_dish', to: "users#save_dish", as: 'save_dish'
+  get "/mytakeaways", to: 'static#mytakeaways', as: 'mytakeaways'
+  get "/analytics", to: 'analytics#index', as: 'analytics'
   root :to => 'static#index'
-  get "/nearme", to: "static#nearme"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

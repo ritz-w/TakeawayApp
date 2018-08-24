@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in? # methods available to the view
+  helper_method :current_user, :logged_in?, :admin? # methods available to the view
 
   def current_user
     if session[:user_id]
@@ -27,4 +27,9 @@ class ApplicationController < ActionController::Base
       redirect_to current_user
     end
   end
+
+  def admin?
+    current_user.admin
+  end
+
 end

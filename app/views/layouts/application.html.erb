@@ -8,6 +8,8 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|M+PLUS+Rounded+1c" rel="stylesheet">
+    <link href="//use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -18,14 +20,19 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
+      <% if admin? %>
+        <li class="nav-item nav-link">
+          <%= link_to "Anlaytics", analytics_path %>
+        </li>
+      <% end %>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href='restaurants/index.html' id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Takeaways
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href= <%= restaurants_path %> >All Takeaways</a>
-          <a class="dropdown-item" href= <%= nearme_path %> >Takeaways Near You</a>
+          <%= link_to 'All Takeaways', restaurants_path, class: "dropdown-item" %>
           <a class="dropdown-item" href="#">Takeaways By Regional Cuisine</a>
+          <%= link_to 'My Closest Takeaways', mytakeaways_path, class: "dropdown-item" %>
         </div>
       </li>
         <li class="nav-item dropdown">
@@ -33,7 +40,7 @@
             Dishes
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href= <%= dishes_path %> >All Dishes</a>
+            <%= link_to 'All Dishes', dishes_path, class: "dropdown-item" %>
             <a class="dropdown-item" href="#">Dishes By Regional Cuisine</a>
           </div>
         </li>
@@ -43,6 +50,8 @@
         </li>
           <% else %>
           <%= link_to "Log in", login_path, class: "nav-item nav-link" %>
+          <%= link_to "Sign up", signup_path, class: "nav-item nav-link" %>
+
           <% end %>
     </div>
   </div>
