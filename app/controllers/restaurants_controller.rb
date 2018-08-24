@@ -25,7 +25,6 @@ class RestaurantsController < ApplicationController
   end
 
   def add_rating
-    byebug
     rating = RestaurantsRating.find(params[:id])
     rating.update(rating: params["score"])
     redirect_to restaurant_path(rating.restaurant)

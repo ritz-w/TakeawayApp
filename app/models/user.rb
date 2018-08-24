@@ -18,4 +18,10 @@ class User < ApplicationRecord
     result << response["result"]["longitude"]
     result
   end
+
+  def nearest_restaurants
+     results = Restaurant.all.sort_by{|restaurant| restaurant.proximity_to_user(self)}
+     results[0..2]
+  end
+
 end

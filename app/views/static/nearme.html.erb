@@ -1,43 +1,18 @@
 <div class="container">
   <p>
-  <div class="row">
+  <div class="row title">
       <h1>Restaurants nearby</h1>
   </div>
+  <% @google["results"].map do |restaurant| %>
   <div class="row">
-    <div  class="col">
-      <% @google["results"].map do |restaurant| %>
-      <div class="row align-tiems-start">
-          <p><%= restaurant["name"]%></p>
-      </div>
-      <div class="row">
-          <p><%= restaurant["vicinity"]%></p><br>
-          <div class="col-md-6">
-            <!--The div element for the map -->
-            <div class="container" id="map-container">
-            </div>
-            <script>
-            // Initialize and add the map
-            function initMap() {
-              // The location of Uluru
-              var place = {lat: <%=  %> , lng: <%=  %>};
-              // The map, centered at Uluru
-              var map = new google.maps.Map(
-                document.getElementById('map-container'), {zoom: 12, center: place});
-                // The marker, positioned at Uluru
-                var marker = new google.maps.Marker({position: place, map: map});
-              }
-              </script>
-              <script async defer
-              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWHIVYglIX-UITv9CS6aXjTkrfL7Zm200&callback=initMap">
-              </script>
-            </div>
-      </div>
-      <div class="row">
-          <p><% restaurant["geometry"]["location"]["lat"] %></p>
-      </div>
-      <div class="row">
-          <p><% restaurant["geometry"]["location"]["lng"] %></p>
-      </div>
-    <% end %>
+    <div class="col-md-6">
+      <h3><%= restaurant["name"]%></h3>
+      <p><%= restaurant["vicinity"]%></p>
+      <p><% restaurant["geometry"]["location"]["lat"] %></p>
+      <p><% restaurant["geometry"]["location"]["lng"] %></p>
+    </div>
+    <div class="col-md-6">
     </div>
   </div>
+  <% end %>
+</div>

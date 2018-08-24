@@ -3,10 +3,6 @@ class Restaurant < ApplicationRecord
   has_many :restaurants_ratings
   has_many :users, through: :restaurants_ratings
 
-  geocoded_by :get_address
-  before_create :check_number
-  reverse_geocoded_by :latitude, :longitude, :address => :address
-  after_validation :geocode, :reverse_geocode
 
     def get_address
       if self.address != nil
@@ -41,8 +37,6 @@ class Restaurant < ApplicationRecord
         return 0
       end
     end
-
-
 
     def check_number
       self.number.to_f

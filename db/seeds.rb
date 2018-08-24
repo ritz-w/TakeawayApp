@@ -12,13 +12,14 @@ Dish.destroy_all
 
 
 User.create([
-  {name: "Ritz Wu", username: "rizulol", password: "xoxo", postcode: "SE1 7LH"},
-  {name: "Adham Muhammad", username: "adham_eats", password: "xoxo", postcode: "SW16 1AA"},
+  {name: "Ritz Wu", username: "rizulol", password: "xoxo", postcode: "SE1 7LH", admin: true},
+  {name: "Adham Muhammad", username: "adham_eats", password: "xoxo", postcode: "SW16 1AA", admin: true},
   {name: "Sarah Jacobs", username: "sarah_eats", password: "xoxo", postcode: "N15 5PX"},
   {name: "Steven Balasta", username: "steven_eats", password: "xoxo", postcode: "EC2Y 1NT"},
   {name: "Maduri Vassaramo", username: "maduri_eats", password: "xoxo", postcode: "N5 5EH"}
   ])
 
+Restaurant.create(name: "My Old Place", address: "88-90 Middlesex St, London", postcode: "E1 7EZ", phone_number: '020 72472200')
 Restaurant.create(name: "My Old Place", address: "88-90 Middlesex St, London", postcode: "E1 7EZ", phone_number: '020 72472200')
 Restaurant.create(name: "Taste of China", address: "53 Hackney Rd, London", postcode: " E2 7NX", phone_number: '020 77391228')
 Restaurant.create(name: "Ming Pat", address: "11 Cropley St, Islington, London", postcode: "N1 7PT", phone_number: '020 72501868')
@@ -42,7 +43,6 @@ dish_names.each do |dish_name|
       images << json["query"]["pages"]["#{key}"]["imageinfo"][0]["url"]
     end
     img_jpg_urls = images.select {|img| img.include?(".JPG") || img.include?(".jpg")}
-    Dish.create(name: dish, description: wiki_page.summary, region: region, photo_1: img_jpg_urls.first, photo_2: img_jpg_urls.last)
     img_jpg_urls << "https://loremflickr.com/320/240/#{dish.split.join(",")}"
     Dish.create(name: dish, description: wiki_page.summary, region: region, photo_1: img_jpg_urls[1], photo_2: img_jpg_urls[2], photo_3: img_jpg_urls.last)
   end
