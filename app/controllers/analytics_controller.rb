@@ -103,5 +103,3 @@ private
   def users_by_highest_number_of_dishes
     all_users.sort_by{|user| user.dishes.length}.reverse
   end
-
-end
