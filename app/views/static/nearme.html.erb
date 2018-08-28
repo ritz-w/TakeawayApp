@@ -16,3 +16,23 @@
   </div>
   <% end %>
 </div>
+
+<!--The div element for the map -->
+<div class="container" id="closest-map-container">
+</div>
+<script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var place = {lat: <%=  %> , lng: <%=  %>};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+    document.getElementById('closest-map-container'), {zoom: 12, center: place});
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({position: place, map: map});
+  }
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWHIVYglIX-UITv9CS6aXjTkrfL7Zm200&callback=initMap">
+  </script>
+</div>
